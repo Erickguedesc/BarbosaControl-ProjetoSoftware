@@ -228,3 +228,246 @@ Banco de Dados PostgreSQL
   ↓
 Sistema Externo Asaas
 
+```
+
+## 📊 Diagramas UML
+
+Os diagramas do sistema foram elaborados utilizando **PlantUML**, conforme solicitado na proposta do trabalho. Os arquivos estão localizados na pasta `docs/`.
+
+| Diagrama | Arquivo |
+|---|---|
+| Diagrama de Caso de Uso | [`docs/caso-de-uso.puml`](docs/caso-de-uso.puml) |
+| Diagrama de Classes | [`docs/diagrama-classes.puml`](docs/diagrama-classes.puml) |
+| Diagrama de Sequência - Venda Fiada | [`docs/sequencia-venda-fiada.puml`](docs/sequencia-venda-fiada.puml) |
+| Diagrama de Sequência - Pagamento | [`docs/sequencia-pagamento.puml`](docs/sequencia-pagamento.puml) |
+| Diagrama de Componentes | [`docs/componentes.puml`](docs/componentes.puml) |
+| Diagrama de Implantação | [`docs/implantacao.puml`](docs/implantacao.puml) |
+| Diagrama de Estados - Conta Fiada | [`docs/estados-conta-fiada.puml`](docs/estados-conta-fiada.puml) |
+| Modelo de Dados | [`docs/modelo-dados.puml`](docs/modelo-dados.puml) |
+
+---
+
+## 📁 Estrutura de Pastas
+
+```text
+Barbosa-Confec-es-Projeto/
+│
+├── README.md
+│
+├── docs/
+│   ├── documentacao-projeto.md
+│   ├── caso-de-uso.puml
+│   ├── diagrama-classes.puml
+│   ├── sequencia-venda-fiada.puml
+│   ├── sequencia-pagamento.puml
+│   ├── componentes.puml
+│   ├── implantacao.puml
+│   ├── estados-conta-fiada.puml
+│   └── modelo-dados.puml
+│
+└── imagens/
+    ├── caso-de-uso.png
+    ├── diagrama-classes.png
+    ├── sequencia-venda-fiada.png
+    ├── sequencia-pagamento.png
+    ├── componentes.png
+    ├── implantacao.png
+    ├── estados-conta-fiada.png
+    └── modelo-dados.png
+```
+
+---
+
+## ▶️ Instalação e Execução
+
+Embora este projeto esteja, neste momento, na fase de documentação, modelagem e arquitetura, a aplicação foi planejada para futuramente ser desenvolvida como um sistema web completo, contendo front-end, back-end e banco de dados.
+
+Abaixo está descrito o processo previsto de instalação e execução do sistema.
+
+### Pré-requisitos
+
+Para executar o projeto futuramente, será necessário ter instalado:
+
+- Git;
+- Node.js;
+- npm;
+- Java JDK 17 ou superior;
+- Maven;
+- PostgreSQL;
+- Docker e Docker Compose, caso seja utilizada execução containerizada.
+
+---
+
+### Clonar o repositório
+
+```bash
+git clone https://github.com/erickguedes/barbosa-confeccoes-projeto.git
+```
+
+```bash
+cd barbosa-confeccoes-projeto
+```
+
+---
+
+### Configurar o banco de dados
+
+O sistema foi planejado para utilizar o banco de dados PostgreSQL.
+
+Exemplo de configuração prevista:
+
+```sql
+CREATE DATABASE barbosa_control;
+```
+
+Configurações esperadas para conexão:
+
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=barbosa_control
+DB_USER=postgres
+DB_PASSWORD=postgres
+```
+
+---
+
+### Executar o back-end
+
+O back-end será desenvolvido futuramente utilizando Java com Spring Boot.
+
+A estrutura prevista será:
+
+```text
+backend/
+├── src/
+├── pom.xml
+└── application.properties
+```
+
+Para executar:
+
+```bash
+cd backend
+```
+
+```bash
+mvn spring-boot:run
+```
+
+A API ficará disponível em:
+
+```text
+http://localhost:8080
+```
+
+---
+
+### Executar o front-end
+
+O front-end será desenvolvido futuramente utilizando React com Vite.
+
+A estrutura prevista será:
+
+```text
+frontend/
+├── src/
+├── package.json
+└── vite.config.js
+```
+
+Para instalar as dependências:
+
+```bash
+cd frontend
+```
+
+```bash
+npm install
+```
+
+Para executar:
+
+```bash
+npm run dev
+```
+
+A aplicação ficará disponível em:
+
+```text
+http://localhost:5173
+```
+
+---
+
+### Execução com Docker
+
+Também está prevista a possibilidade de execução com Docker Compose, contendo os serviços de front-end, back-end e banco de dados.
+
+Exemplo de comando:
+
+```bash
+docker compose up -d
+```
+
+Serviços previstos:
+
+| Serviço | Porta | Descrição |
+|---|---|---|
+| Front-end | 5173 | Interface web do sistema |
+| Back-end | 8080 | API REST |
+| PostgreSQL | 5432 | Banco de dados |
+
+---
+
+### Observação
+
+Atualmente, este repositório contém apenas a documentação, os diagramas UML e a arquitetura proposta do sistema. A implementação do código-fonte poderá ser realizada futuramente com base na estrutura e nos modelos definidos neste projeto.
+## 🧪 Testes
+
+Como este projeto não possui implementação de código, os testes foram planejados de forma conceitual, considerando os principais fluxos do sistema.
+
+| Tipo de Teste | Objetivo |
+|---|---|
+| Teste de Cadastro de Cliente | Verificar se os dados obrigatórios do cliente são registrados corretamente. |
+| Teste de Venda Fiada | Verificar se uma venda fiada gera uma conta a receber com vencimento em até 30 dias. |
+| Teste de Pagamento Parcial | Verificar se o sistema calcula corretamente o saldo restante após um AV. |
+| Teste de Conta Vencida | Verificar se uma conta é marcada como vencida após ultrapassar o prazo. |
+| Teste de Bloqueio de Fiado | Verificar se clientes inadimplentes são impedidos de comprar fiado novamente. |
+| Teste de Baixa de Estoque | Verificar se o estoque é reduzido após o registro de uma venda. |
+| Teste de Cobrança Asaas | Verificar se o sistema permite registrar uma cobrança externa vinculada ao Asaas. |
+
+---
+
+## 📚 Documentações Utilizadas
+
+- [PlantUML](https://plantuml.com/) — ferramenta utilizada para modelagem dos diagramas UML.
+- [Markdown Guide](https://www.markdownguide.org/) — referência para escrita do README.md.
+- [React](https://react.dev/) — tecnologia proposta para o front-end.
+- [Spring Boot](https://spring.io/projects/spring-boot) — tecnologia proposta para o back-end.
+- [PostgreSQL](https://www.postgresql.org/) — banco de dados proposto para persistência.
+- [Asaas](https://www.asaas.com/) — sistema externo citado no contexto de boletos e cobrança.
+
+---
+
+## 👤 Autores
+
+| Nome | Função |
+|---|---|
+| Erick Guedes de Carvalho | Elaboração do projeto, documentação e diagramas UML |
+
+---
+
+## 🤝 Contribuição
+
+Este projeto foi desenvolvido como atividade individual da disciplina de Projeto de Software.
+
+Não há fluxo de contribuição externa previsto para esta versão.
+
+---
+
+## 📄 Licença
+
+Este projeto possui finalidade acadêmica.
+
+Todos os direitos reservados ao autor.
