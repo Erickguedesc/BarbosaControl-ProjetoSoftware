@@ -239,10 +239,10 @@ Os diagramas do sistema foram elaborados utilizando **PlantUML**, conforme solic
 | Diagrama de Caso de Uso | [`docs/caso-de-uso.puml`](docs/caso-de-uso.puml) |
 | Diagrama de Classes | [`docs/diagrama-classes.puml`](docs/diagrama-classes.puml) |
 | Diagrama de Sequência - Venda Fiada | [`docs/sequencia-venda-fiada.puml`](docs/sequencia-venda-fiada.puml) |
-| Diagrama de Sequência - Pagamento | [`docs/sequencia-pagamento.puml`](docs/sequencia-pagamento.puml) |
-| Diagrama de Componentes | [`docs/componentes.puml`](docs/componentes.puml) |
-| Diagrama de Implantação | [`docs/implantacao.puml`](docs/implantacao.puml) |
-| Diagrama de Estados - Conta Fiada | [`docs/estados-conta-fiada.puml`](docs/estados-conta-fiada.puml) |
+| Diagrama de Sequência - Pagamento | [`docs/sequencia-pagamento.puml`](docs/sequence_diagramsequencia-pagamento.puml) |
+| Diagrama de Componentes | [`docs/componentes.puml`](docs/component_diagram.puml) |
+| Diagrama de Implantação | [`docs/implantacao.puml`](docs/deployment_diagram.puml) |
+| Diagrama de Estados - Conta Fiada | [`docs/estados-conta-fiada.puml`](docs/state_diagram.puml) |
 | Modelo de Dados | [`docs/modelo-dados.puml`](docs/modelo-dados.puml) |
 
 ---
