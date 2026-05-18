@@ -1,0 +1,215 @@
+@startuml
+title Diagrama de Classes - VestFácil
+
+skinparam classAttributeIconSize 0
+skinparam classFontSize 13
+skinparam classAttributeFontSize 12
+skinparam shadowing false
+
+class Usuario {
+  - id: Long
+  - nome: String
+  - email: String
+  - senha: String
+  - perfil: PerfilUsuario
+  - ativo: Boolean
+}
+
+class Cliente {
+  - id: Long
+  - nome: String
+  - cpf: String
+  - telefone: String
+  - endereco: String
+  - statusFiado: StatusFiado
+  - saldoDevedor: BigDecimal
+  - observacoes: String
+  --
+  + verificarAdimplencia(): Boolean
+  + bloquear(): void
+  + desbloquear(): void
+}
+
+class Produto {
+  - id: Long
+  - nome: String
+  - categoria: String
+  - tamanho: String
+  - cor: String
+  - precoVenda: BigDecimal
+  - quantidadeEstoque: Integer
+  - estoqueMinimo: Integer
+  - ativo: Boolean
+  --
+  + estaDisponivel(): Boolean
+  + temEstoqueBaixo(): Boolean
+}
+
+class Venda {
+  - id: Long
+  - dataVenda: LocalDateTime
+  - valorTotal: BigDecimal
+  - formaPagamento: FormaPagamento
+  - statusVenda: StatusVenda
+  --
+  + calcularTotal(): BigDecimal
+  + cancelar(): void
+}
+
+class ItemVenda {
+  - id: Long
+  - vendaId: Long
+  - produtoId: Long
+  - quantidade: Integer
+  - precoUnitario: BigDecimal
+  - subtotal: BigDecimal
+  --
+  + calcularSubtotal(): BigDecimal
+}
+
+class ContaReceber {
+  - id: Long
+  - vendaId: Long
+  - clienteId: Long
+  - usuarioId: Long
+  - valorOriginal: BigDecimal
+  - valorPago: BigDecimal
+  - saldoDevedor: BigDecimal
+  - dataLancamento: LocalDate
+  - dataVencimento: LocalDate
+  - statusConta: StatusConta
+  - origemCobranca: OrigemCobranca
+  --
+  + registrarPagamento(valor: BigDecimal): void
+  + verificarVencimento(): Boolean
+  + calcularDiasAtraso(): Integer
+  + {static} calcularVencimento(lancamento: LocalDate): LocalDate
+}
+
+class Pagamento {
+  - id: Long
+  - contaId: Long
+  - usuarioId: Long
+  - dataPagamento: LocalDate
+  - valorPago: BigDecimal
+  - tipoPagamento: TipoPagamento
+  - observacao: String
+  --
+  + validar(): Boolean
+}
+
+class CobrancaAsaas {
+  - id: Long
+  - contaId: Long
+  - codigoCobrancaAsaas: String
+  - linkBoleto: String
+  - statusCobranca: StatusCobrancaAsaas
+  - dataEnvio: LocalDate
+  --
+  + atualizar(): void
+}
+
+class Alerta {
+  - id: Long
+  - clienteId: Long
+  - tipo: TipoAlerta
+  - mensagem: String
+  - dataGeracao: LocalDateTime
+  - lido: Boolean
+  --
+  + marcarComoLido(): void
+}
+
+' ── Enums ──────────────────────────────────────────
+
+enum PerfilUsuario {
+  ADMINISTRADOR
+  VENDEDOR
+}
+
+enum StatusFiado {
+  LIBERADO
+  BLOQUEADO
+}
+
+enum FormaPagamento {
+  DINHEIRO
+  DEBITO
+  CREDITO
+  FIADO
+  BOLETO_ASAAS
+}
+
+enum StatusVenda {
+  PAGA
+  FIADA
+  CANCELADA
+}
+
+enum StatusConta {
+  EM_ABERTO
+  PAGA_PARCIALMENTE
+  PAGA
+  VENCIDA
+  CANCELADA
+}
+
+enum OrigemCobranca {
+  FIADO
+  BOLETO_ASAAS
+}
+
+enum TipoPagamento {
+  DINHEIRO
+  DEBITO
+  CREDITO
+  PIX
+  AV
+  BOLETO
+}
+
+enum StatusCobrancaAsaas {
+  GERADA
+  ENVIADA
+  PAGA
+  VENCIDA
+  CANCELADA
+}
+
+enum TipoAlerta {
+  CONTA_VENCIDA
+  ESTOQUE_BAIXO
+  CLIENTE_INADIMPLENTE
+}
+
+' ── Relacionamentos ────────────────────────────────
+
+Cliente "1" -- "0..*" Venda         : realiza
+Cliente "1" -- "0..*" ContaReceber  : possui
+Cliente "1" -- "0..*" Alerta        : recebe
+
+Venda "1" -- "1..*" ItemVenda       : possui
+Venda "1" -- "0..1" ContaReceber    : gera
+
+Produto "1" -- "0..*" ItemVenda     : compõe
+
+ContaReceber "1" -- "0..*" Pagamento       : recebe
+ContaReceber "1" -- "0..1" CobrancaAsaas   : pode gerar
+
+Usuario "1" -- "0..*" Venda         : registra
+Usuario "1" -- "0..*" Pagamento     : registra
+Usuario "1" -- "0..*" ContaReceber  : abre
+
+' ── Dependências de Enum ───────────────────────────
+
+Usuario      --> PerfilUsuario
+Cliente      --> StatusFiado
+Venda        --> FormaPagamento
+Venda        --> StatusVenda
+ContaReceber --> StatusConta
+ContaReceber --> OrigemCobranca
+Pagamento    --> TipoPagamento
+CobrancaAsaas --> StatusCobrancaAsaas
+Alerta       --> TipoAlerta
+
+@enduml
