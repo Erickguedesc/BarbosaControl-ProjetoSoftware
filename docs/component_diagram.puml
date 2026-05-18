@@ -1,0 +1,84 @@
+@startuml
+title Diagrama de Componentes - Barbosa Control
+
+skinparam componentStyle rectangle
+
+actor "Administrador / Dono" as Admin
+actor "Vendedor" as Vendedor
+
+package "Camada de Apresentação" {
+  component "Front-end Web\nReact + Vite" as Frontend
+  component "Tela de Login" as Login
+  component "Módulo de Clientes" as ClientesUI
+  component "Módulo de Produtos / Estoque" as ProdutosUI
+  component "Módulo de Vendas" as VendasUI
+  component "Módulo de Contas a Receber" as ContasUI
+  component "Módulo de Relatórios" as RelatoriosUI
+}
+
+package "Camada de Aplicação / API" {
+  component "API REST\nSpring Boot" as API
+  component "Auth Controller" as AuthController
+  component "Cliente Controller" as ClienteController
+  component "Produto Controller" as ProdutoController
+  component "Venda Controller" as VendaController
+  component "Conta Receber Controller" as ContaController
+  component "Relatório Controller" as RelatorioController
+
+  component "Serviço de Autenticação" as AuthService
+  component "Serviço de Clientes" as ClienteService
+  component "Serviço de Produtos / Estoque" as ProdutoService
+  component "Serviço de Vendas" as VendaService
+  component "Serviço de Contas a Receber" as ContaService
+  component "Serviço Asaas" as AsaasService
+}
+
+database "Banco de Dados\nPostgreSQL" as DB
+
+cloud "Sistema Externo\nAsaas" as Asaas
+
+Admin --> Frontend
+Vendedor --> Frontend
+
+Frontend --> Login
+Frontend --> ClientesUI
+Frontend --> ProdutosUI
+Frontend --> VendasUI
+Frontend --> ContasUI
+Frontend --> RelatoriosUI
+
+Login --> API
+ClientesUI --> API
+ProdutosUI --> API
+VendasUI --> API
+ContasUI --> API
+RelatoriosUI --> API
+
+API --> AuthController
+API --> ClienteController
+API --> ProdutoController
+API --> VendaController
+API --> ContaController
+API --> RelatorioController
+
+AuthController --> AuthService
+ClienteController --> ClienteService
+ProdutoController --> ProdutoService
+VendaController --> VendaService
+ContaController --> ContaService
+RelatorioController --> VendaService
+RelatorioController --> ContaService
+
+VendaService --> ProdutoService : baixa estoque
+VendaService --> ContaService : gera conta fiada
+ContaService --> AsaasService : registra cobrança externa
+
+AuthService --> DB
+ClienteService --> DB
+ProdutoService --> DB
+VendaService --> DB
+ContaService --> DB
+
+AsaasService --> Asaas : envia dados da cobrança
+
+@enduml

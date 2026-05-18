@@ -1,0 +1,91 @@
+@startuml
+title Diagrama de Comunicação - Registrar Venda Fiada - Barbosa Control
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam linetype ortho
+skinparam defaultFontName Arial
+skinparam object {
+  BackgroundColor #F8F8F8
+  BorderColor #333333
+  FontColor #000000
+}
+skinparam note {
+  BackgroundColor #FFF7CC
+  BorderColor #999999
+  FontColor #000000
+}
+skinparam ArrowColor #222222
+skinparam nodesep 90
+skinparam ranksep 90
+
+object "vendedor: Vendedor" as Vendedor
+object "sistema: Barbosa Control" as Sistema
+object "cliente: Cliente" as Cliente
+object "estoque: Estoque" as Estoque
+object "venda: Venda" as Venda
+object "conta: ContaReceber" as Conta
+
+Vendedor --> Sistema : 1, 2, 6, 10
+Sistema --> Vendedor : 20, 21, 22
+
+Sistema --> Cliente : 3, 4
+Cliente --> Sistema : 5, 5.1, 5.2
+
+Sistema --> Estoque : 7, 11
+Estoque --> Sistema : 8, 8.1, 8.2, 12
+
+Sistema --> Venda : 13
+Venda --> Sistema : 14
+
+Sistema --> Conta : 15, 16, 17, 18
+Conta --> Sistema : 19
+
+note bottom of Cliente
+Regra: cliente com conta vencida
+não pode comprar fiado novamente
+até regularizar a dívida.
+end note
+
+note bottom of Estoque
+Regra: toda venda registrada
+deve baixar a quantidade
+dos produtos vendidos.
+end note
+
+note bottom of Conta
+Regra: venda fiada gera conta a receber
+com prazo de até 30 dias
+e status EM_ABERTO.
+end note
+
+legend right
+|= Nº |= Mensagem |
+| 1 | iniciarRegistroVendaFiada() |
+| 2 | informarCliente() |
+| 3 | consultarSituacaoFinanceira() |
+| 4 | verificarContaVencida() |
+| 5 | retornarSituacaoCliente() |
+| 5.1 | [conta vencida] clienteBloqueado() |
+| 5.2 | [sem conta vencida] clienteLiberado() |
+| 6 | informarProdutos() |
+| 7 | verificarDisponibilidadeProdutos() |
+| 8 | retornarDisponibilidade() |
+| 8.1 | [estoque insuficiente] informarIndisponibilidade() |
+| 8.2 | [estoque disponível] confirmarDisponibilidade() |
+| 10 | confirmarVendaFiada() |
+| 11 | baixarQuantidadeProdutosVendidos() |
+| 12 | confirmarEstoqueAtualizado() |
+| 13 | registrarVenda(FIADO) |
+| 14 | confirmarVendaRegistrada() |
+| 15 | gerarContaReceber() |
+| 16 | definirValorOriginal() |
+| 17 | definirVencimento(30 dias) |
+| 18 | definirStatus(EM_ABERTO) |
+| 19 | confirmarContaCriada() |
+| 20 | [cliente bloqueado] exibirBloqueioFiado() |
+| 21 | [estoque insuficiente] exibirIndisponibilidade() |
+| 22 | [sucesso] confirmarVendaFiadaRegistrada() |
+endlegend
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+title Diagrama de Implantação - Barbosa Control
+
+node "Dispositivo do Usuário" {
+  artifact "Navegador Web" as Browser
+}
+
+node "Servidor Front-end\nVercel" {
+  artifact "Aplicação Web\nReact + Vite" as Frontend
+}
+
+node "Servidor Back-end\nRender" {
+  artifact "API REST\nSpring Boot" as Backend
+}
+
+database "Banco de Dados\nPostgreSQL Cloud" as DB
+
+cloud "Sistema Externo\nAsaas" as Asaas
+
+Browser --> Frontend : HTTPS / Porta 443
+Frontend --> Backend : REST / HTTPS / JSON
+Backend --> DB : JDBC / Porta 5432
+Backend --> Asaas : API REST / HTTPS / Porta 443
+
+@enduml

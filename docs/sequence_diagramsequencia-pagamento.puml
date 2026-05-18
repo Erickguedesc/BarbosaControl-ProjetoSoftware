@@ -1,0 +1,42 @@
+@startuml
+title Diagrama de Sequência - Registrar Pagamento / AV
+
+actor Vendedor
+
+participant "Sistema Barbosa Control" as Sistema
+participant "Cliente" as Cliente
+participant "Conta a Receber" as Conta
+participant "Pagamento" as Pagamento
+
+Vendedor -> Sistema: Iniciar registro de pagamento / AV
+Sistema -> Vendedor: Solicitar identificação do cliente
+
+Vendedor -> Sistema: Informar cliente
+Sistema -> Cliente: Buscar cliente cadastrado
+Cliente --> Sistema: Dados do cliente encontrados
+
+Sistema -> Conta: Consultar contas em aberto do cliente
+Conta --> Sistema: Retornar saldo devedor e vencimento
+
+Sistema --> Vendedor: Exibir contas em aberto
+
+Vendedor -> Sistema: Informar valor pago
+
+Sistema -> Pagamento: Registrar pagamento
+Pagamento --> Sistema: Pagamento registrado
+
+Sistema -> Conta: Atualizar valor pago e saldo devedor
+
+alt Pagamento total
+    Conta -> Conta: Marcar conta como PAGA
+    Conta --> Sistema: Conta quitada
+    Sistema --> Vendedor: Exibir confirmação de quitação
+else Pagamento parcial / AV
+    Conta -> Conta: Marcar conta como PAGA_PARCIALMENTE
+    Conta -> Conta: Atualizar saldo restante
+    Conta -> Conta: Definir novo vencimento em até 30 dias
+    Conta --> Sistema: Conta atualizada com saldo restante
+    Sistema --> Vendedor: Exibir saldo restante e novo vencimento
+end
+
+@enduml

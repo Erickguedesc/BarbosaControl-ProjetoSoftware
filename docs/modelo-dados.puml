@@ -1,0 +1,111 @@
+@startuml
+title Modelo de Dados / DER - Barbosa Control
+
+hide circle
+skinparam linetype ortho
+
+entity "usuarios" as usuarios {
+  * id_usuario : BIGINT <<PK>>
+  --
+  nome : VARCHAR(100)
+  email : VARCHAR(120)
+  senha : VARCHAR(255)
+  perfil : VARCHAR(20)
+  ativo : BOOLEAN
+}
+
+entity "clientes" as clientes {
+  * id_cliente : BIGINT <<PK>>
+  --
+  nome : VARCHAR(100)
+  cpf : VARCHAR(14)
+  telefone : VARCHAR(20)
+  endereco : VARCHAR(255)
+  status_fiado : VARCHAR(20)
+  observacoes : TEXT
+}
+
+entity "produtos" as produtos {
+  * id_produto : BIGINT <<PK>>
+  --
+  nome : VARCHAR(100)
+  categoria : VARCHAR(50)
+  tamanho : VARCHAR(10)
+  cor : VARCHAR(30)
+  preco_venda : DECIMAL(10,2)
+  quantidade_estoque : INT
+  estoque_minimo : INT
+  ativo : BOOLEAN
+}
+
+entity "vendas" as vendas {
+  * id_venda : BIGINT <<PK>>
+  --
+  id_cliente : BIGINT <<FK>>
+  id_usuario : BIGINT <<FK>>
+  data_venda : DATETIME
+  valor_total : DECIMAL(10,2)
+  forma_pagamento : VARCHAR(30)
+  status_venda : VARCHAR(20)
+}
+
+entity "itens_venda" as itens_venda {
+  * id_item_venda : BIGINT <<PK>>
+  --
+  id_venda : BIGINT <<FK>>
+  id_produto : BIGINT <<FK>>
+  quantidade : INT
+  preco_unitario : DECIMAL(10,2)
+  subtotal : DECIMAL(10,2)
+}
+
+entity "contas_receber" as contas_receber {
+  * id_conta : BIGINT <<PK>>
+  --
+  id_venda : BIGINT <<FK>>
+  id_cliente : BIGINT <<FK>>
+  valor_original : DECIMAL(10,2)
+  valor_pago : DECIMAL(10,2)
+  saldo_devedor : DECIMAL(10,2)
+  data_lancamento : DATE
+  data_vencimento : DATE
+  status_conta : VARCHAR(30)
+  origem_cobranca : VARCHAR(30)
+}
+
+entity "pagamentos" as pagamentos {
+  * id_pagamento : BIGINT <<PK>>
+  --
+  id_conta : BIGINT <<FK>>
+  id_usuario : BIGINT <<FK>>
+  data_pagamento : DATE
+  valor_pago : DECIMAL(10,2)
+  tipo_pagamento : VARCHAR(30)
+  observacao : TEXT
+}
+
+entity "cobrancas_asaas" as cobrancas_asaas {
+  * id_cobranca : BIGINT <<PK>>
+  --
+  id_conta : BIGINT <<FK>>
+  codigo_cobranca_asaas : VARCHAR(100)
+  link_boleto : VARCHAR(255)
+  status_cobranca : VARCHAR(30)
+  data_envio : DATE
+}
+
+clientes ||--o{ vendas : realiza
+usuarios ||--o{ vendas : registra
+
+vendas ||--|{ itens_venda : possui
+produtos ||--o{ itens_venda : compoe
+
+vendas ||--o| contas_receber : gera
+clientes ||--o{ contas_receber : possui
+
+contas_receber ||--o{ pagamentos : recebe
+usuarios ||--o{ pagamentos : registra
+
+contas_receber ||--o| cobrancas_asaas : pode_gerar
+
+@enduml

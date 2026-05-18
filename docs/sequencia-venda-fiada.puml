@@ -1,0 +1,48 @@
+@startuml
+title Diagrama de Sequência - Registrar Venda Fiada
+
+actor Vendedor
+
+participant "Sistema Barbosa Control" as Sistema
+participant "Cliente" as Cliente
+participant "Estoque" as Estoque
+participant "Venda" as Venda
+participant "Conta a Receber" as Conta
+
+Vendedor -> Sistema: Iniciar registro de venda fiada
+Sistema -> Vendedor: Solicitar dados do cliente
+
+Vendedor -> Sistema: Informar cliente
+Sistema -> Cliente: Consultar situação financeira do cliente
+
+alt Cliente possui conta vencida
+    Cliente --> Sistema: Cliente bloqueado para fiado
+    Sistema --> Vendedor: Exibir mensagem de bloqueio
+else Cliente liberado para fiado
+    Cliente --> Sistema: Cliente liberado
+
+    Vendedor -> Sistema: Informar produtos da venda
+    Sistema -> Estoque: Verificar disponibilidade dos produtos
+
+    alt Produto sem estoque suficiente
+        Estoque --> Sistema: Estoque insuficiente
+        Sistema --> Vendedor: Informar indisponibilidade
+    else Produtos disponíveis
+        Estoque --> Sistema: Estoque disponível
+
+        Vendedor -> Sistema: Confirmar venda fiada
+        Sistema -> Venda: Registrar venda com forma de pagamento FIADO
+        Venda --> Sistema: Venda registrada
+
+        Sistema -> Estoque: Baixar quantidade dos produtos vendidos
+        Estoque --> Sistema: Estoque atualizado
+
+        Sistema -> Conta: Gerar conta a receber
+        Conta -> Conta: Definir vencimento em 30 dias
+        Conta --> Sistema: Conta criada em aberto
+
+        Sistema --> Vendedor: Venda fiada registrada com sucesso
+    end
+end
+
+@enduml
