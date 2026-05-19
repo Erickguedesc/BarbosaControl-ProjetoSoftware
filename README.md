@@ -247,6 +247,21 @@ Os diagramas do sistema foram elaborados utilizando **PlantUML**, conforme solic
 | Modelo de Dados | [`Códigos/modelo-dados.puml`](Códigos/modelo-dados.puml) |
 ---
 
+## Imagens dos Diagramas
+
+| Diagrama | Imagem |
+|---|---|
+| Diagrama de Caso de Uso | [`Diagramas/use_case_diagram.png`](Diagramas/use_case_diagram.png) |
+| Diagrama de Classes | [`Diagramas/class_diagram.png`](Diagramas/class_diagram.png) |
+| Diagrama de Sequência - Venda Fiada | [`Diagramas/sequencia-venda-fiada.png`](Diagramas/sequencia-venda-fiada.png) |
+| Diagrama de Sequência - Pagamento | [`Diagramas/sequencia-pagamento.png`](Diagramas/sequencia-pagamento.png) |
+| Diagrama de Sequência - Cobrança Asaas | [`Diagramas/sequence_diagram-cobranca-assas.png`](Diagramas/sequence_diagram-cobranca-assas.png) |
+| Diagrama de Comunicação | [`Diagramas/communication_diagram.png`](Diagramas/communication_diagram.png) |
+| Diagrama de Componentes | [`Diagramas/component_diagram.png`](Diagramas/component_diagram.png) |
+| Diagrama de Implantação | [`Diagramas/deployment_diagram.png`](Diagramas/deployment_diagram.png) |
+| Diagrama de Estados - Conta Fiada | [`Diagramas/diagrama_estados_conta_receber.png`](Diagramas/diagrama_estados_conta_receber.png) |
+| Modelo de Dados | [`Diagramas/entity_relationship_diagram.png`](Diagramas/entity_relationship_diagram.png) |
+
 ## 📁 Estrutura de Pastas
 
 ```text
