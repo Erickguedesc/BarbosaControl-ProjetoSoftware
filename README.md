@@ -232,7 +232,7 @@ Sistema Externo Asaas
 
 ## 📊 Diagramas UML
 
-Os diagramas do sistema foram elaborados utilizando **PlantUML**, conforme solicitado na proposta do trabalho. Os arquivos estão localizados na pasta `docs/`.
+Os diagramas do sistema foram elaborados utilizando **PlantUML**, conforme solicitado na proposta do trabalho. Os arquivos estão localizados na pasta `Códigos/`.
 
 | Diagrama | Arquivo |
 |---|---|
