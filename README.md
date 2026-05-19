@@ -262,33 +262,40 @@ Os diagramas do sistema foram elaborados utilizando **PlantUML**, conforme solic
 | Diagrama de Estados - Conta Fiada | [`Diagramas/diagrama_estados_conta_receber.png`](Diagramas/diagrama_estados_conta_receber.png) |
 | Modelo de Dados | [`Diagramas/entity_relationship_diagram.png`](Diagramas/entity_relationship_diagram.png) |
 
+
 ## 📁 Estrutura de Pastas
 
 ```text
-Barbosa-Confec-es-Projeto/
+BarbosaControl-ProjetoSoftware/
 │
 ├── README.md
 │
-├── docs/
-│   ├── documentacao-projeto.md
-│   ├── caso-de-uso.puml
-│   ├── diagrama-classes.puml
-│   ├── sequencia-venda-fiada.puml
-│   ├── sequencia-pagamento.puml
-│   ├── componentes.puml
-│   ├── implantacao.puml
-│   ├── estados-conta-fiada.puml
-│   └── modelo-dados.puml
+├── Docs/
+│   └── documentacao-projeto.pdf
 │
-└── imagens/
-    ├── caso-de-uso.png
-    ├── diagrama-classes.png
-    ├── sequencia-venda-fiada.png
+├── Códigos/
+│   ├── caso-de-uso.puml
+│   ├── communication_diagram.puml
+│   ├── component_diagram.puml
+│   ├── deployment_diagram.puml
+│   ├── diagrama-classes.puml
+│   ├── modelo-dados.puml
+│   ├── sequence_diagramsequencia-pagamento.puml
+│   ├── sequencia-venda-fiada.puml
+│   └── state_diagram.puml
+│
+└── Diagramas/
+    ├── class_diagram.png
+    ├── communication_diagram.png
+    ├── component_diagram.png
+    ├── deployment_diagram.png
+    ├── diagrama_estados_conta_receber.png
+    ├── entity_relationship_diagram.png
+    ├── sequence_diagram-cobranca-assas.png
     ├── sequencia-pagamento.png
-    ├── componentes.png
-    ├── implantacao.png
-    ├── estados-conta-fiada.png
-    └── modelo-dados.png
+    ├── sequencia-venda-fiada.png
+    └── use_case_diagram.png
+
 ```
 
 ---
