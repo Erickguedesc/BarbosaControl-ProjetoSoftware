@@ -236,16 +236,15 @@ Os diagramas do sistema foram elaborados utilizando **PlantUML**, conforme solic
 
 | Diagrama | Arquivo |
 |---|---|
-| Diagrama de Caso de Uso | [`docs/caso-de-uso.puml`](docs/caso-de-uso.puml) |
-| Diagrama de Classes | [`docs/diagrama-classes.puml`](docs/diagrama-classes.puml) |
-| Diagrama de Sequência - Venda Fiada | [`docs/sequencia-venda-fiada.puml`](docs/sequencia-venda-fiada.puml) |
-| Diagrama de Sequência - Pagamento | [`docs/sequencia-pagamento.puml`](docs/sequence_diagramsequencia-pagamento.puml) |
-| Diagrama de Sequência - Cobrança Asaas | [`docs/sequencia-cobranca-asaas.puml`](docs/sequencia-cobranca-asaas.puml) |
-| Diagrama de Componentes | [`docs/componentes.puml`](docs/component_diagram.puml) |
-| Diagrama de Implantação | [`docs/implantacao.puml`](docs/deployment_diagram.puml) |
-| Diagrama de Estados - Conta Fiada | [`docs/estados-conta-fiada.puml`](docs/state_diagram.puml) |
-| Modelo de Dados | [`docs/modelo-dados.puml`](docs/modelo-dados.puml) |
-
+| Diagrama de Caso de Uso | [`Códigos/caso-de-uso.puml`](Códigos/caso-de-uso.puml) |
+| Diagrama de Classes | [`Códigos/diagrama-classes.puml`](Códigos/diagrama-classes.puml) |
+| Diagrama de Sequência - Venda Fiada | [`Códigos/sequencia-venda-fiada.puml`](Códigos/sequencia-venda-fiada.puml) |
+| Diagrama de Sequência - Pagamento | [`Códigos/sequence_diagramsequencia-pagamento.puml`](Códigos/sequence_diagramsequencia-pagamento.puml) |
+| Diagrama de Comunicação | [`Códigos/communication_diagram.puml`](Códigos/communication_diagram.puml) |
+| Diagrama de Componentes | [`Códigos/component_diagram.puml`](Códigos/component_diagram.puml) |
+| Diagrama de Implantação | [`Códigos/deployment_diagram.puml`](Códigos/deployment_diagram.puml) |
+| Diagrama de Estados - Conta Fiada | [`Códigos/state_diagram.puml`](Códigos/state_diagram.puml) |
+| Modelo de Dados | [`Códigos/modelo-dados.puml`](Códigos/modelo-dados.puml) |
 ---
 
 ## 📁 Estrutura de Pastas
