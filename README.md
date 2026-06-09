@@ -55,8 +55,8 @@
 ## 🔗 Links Úteis
 
 * 📖 **PlantUML:** [https://plantuml.com/](https://plantuml.com/)
-* 📄 **Documentação do Projeto:** [`docs/documentacao-projeto.md`](docs/documentacao-projeto.md)
-* 🧩 **Diagramas UML:** [`docs/`](docs/)
+* 📄 **Documentação do Projeto:** [BARBOSA CONTROL - TRAB. FINAL.pdf](Docs/BARBOSA%20CONTROL%20-%20TRAB.%20FINAL.pdf)
+* 🧩 **Diagramas UML:** [Docs/](Docs/)
 
 ---
 
